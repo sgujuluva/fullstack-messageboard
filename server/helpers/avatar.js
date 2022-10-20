@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-function generateRobohashAvatar () {
+export function generateRobohashAvatar () {
     const baseUrl = "https://robohash.org";
     const randomString = generateRandomString(12);
     const set = Math.ceil(Math.random() * 4)
@@ -14,7 +14,7 @@ function generateRandomString(size = 21) {
         .slice(0, size)
 }
 
-export default {
+/* export default {
     generateRobohashAvatar,
     generateRandomString
-}
+} */

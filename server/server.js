@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors"
 import userRoutes from "./routes/user.js";
-import messageRoutes from "./routes/message";
+import messageRoutes from "./routes/message.js";
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(cors({
 
 // specify your routes here
 app.use("/user",userRoutes);
-app.use("/user",messageRoutes);
+app.use("/message",messageRoutes);
 
 console.log("Connecting to database. Put the kettle on while you wait... 🫖");
 
