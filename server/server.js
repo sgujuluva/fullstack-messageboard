@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from "cors"
 import userRoutes from "./routes/user.js";
 
 const app = express();
@@ -9,8 +10,14 @@ dotenv.config();
 
 // specify your middleware here
 
+app.use(express.json());
+
+app.use(cors({
+  origin:"*"
+}));
 
 // specify your routes here
+app.use("/user",userRoutes)
 
 console.log("Connecting to database. Put the kettle on while you wait... 🫖");
 
