@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import User from "../models/User.js"
 
 const MessageSchema = new mongoose.Schema({
   user_id: {
@@ -12,7 +13,7 @@ const MessageSchema = new mongoose.Schema({
   },
   dates: {
     created: Date,
-    default: Date.now(),
+    default: Date.now,
     last_edited: Date,
   },
   category: {
