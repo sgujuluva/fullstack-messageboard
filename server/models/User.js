@@ -15,6 +15,6 @@ const UserSchema = new mongoose.Schema({
   messages: Number,
 });
 
-const User = mongoose.model("user", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 export default User;
