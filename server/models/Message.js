@@ -4,6 +4,7 @@ import User from "../models/User.js";
 const { Schema, model } = mongoose;
 
 const MessageSchema = new Schema({
+  _id:String,
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
