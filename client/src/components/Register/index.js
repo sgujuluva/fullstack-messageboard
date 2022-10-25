@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,6 +17,7 @@ export default function Register() {
         email: formData.get("email"),
         password: formData.get("password"),
       });
+      navigate("/login");
     } catch (error) {
       setError(error.response.data.message);
     }
