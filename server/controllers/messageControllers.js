@@ -20,9 +20,11 @@ export const editMessage = async (req, res) => {
 
     const { user_id, message_id} = req.body;
 
+// to check whether message already there or not
     if (!mongoose.Types.ObjectId.isValid(message_id)) 
-    return res.status(404).send(`No post with id: ${message_id}`);  
+        return res.status(404).send(`No post with id: ${message_id}`); 
 
+//to check whether user already there or not
     if (!mongoose.Types.ObjectId.isValid(user_id)) 
     return res.status(404).send(`No user with id: ${user_id}`);  
 
@@ -34,3 +36,14 @@ export const editMessage = async (req, res) => {
    return res.json( checkUserId);
     }
  
+    //delete message
+
+  export const deleteMessage = async(req,res) => {
+
+    const deleteTheMessage = await Message.deleteOne({
+      user_id:req.body.user_id,
+message_id:req.body.message_id,
+content:req.body.content,
+    })
+    return res.status(200).json({message:"Message is deleted",deleteTheMessage})
+  }

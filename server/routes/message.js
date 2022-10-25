@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {fetchAllPost, messagePost, editMessage } from "../controllers/messageControllers.js";
+import {fetchAllPost, messagePost, editMessage,deleteMessage } from "../controllers/messageControllers.js";
 const router = Router();
 
 //getting all msg
@@ -10,5 +10,8 @@ router.post("/post", messagePost);
 
 //edit the message
 router.patch("/edit", editMessage);
+
+//delete the message
+router.delete("/delete",deleteMessage)
 
 export default router;
