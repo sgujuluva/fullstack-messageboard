@@ -51,3 +51,9 @@ export const loginUser = async (req, res) => {
     return res.json(error.message)
   }
 }
+
+//get allusers
+ export const getUsersList = async(req,res) => {
+const getUsers = await User.find().select("username")
+return res.status(200).json({message:"Getting the list of all users",getUsers})
+}
