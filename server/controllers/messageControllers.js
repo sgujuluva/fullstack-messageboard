@@ -1,5 +1,9 @@
-import mongoose from "mongoose"
 import Message from "../models/Message.js";
+
+export const fetchAllPost = async(req,res) => {
+const getPosts = await Message.find();
+return res.status(200).json({message:"All posts here",getPosts})
+}
 
 export const messagePost = async (req, res) => {
   const postMessage = await Message.create({
@@ -60,30 +64,17 @@ export const messagePost = async (req, res) => {
 };
  */
 export const editMessage = async (req, res) => {
-    const { user_id, message_id,content } = req.body;
+    const { user_id,_id,content } = req.body;
 
-    const checkMessage =  await Message.findOne({message_id});
-    const checkUserId = await Message.findOne({message_id})
-    
-    if( !mongoose.Types.ObjectId.isValid(message_id) ) return false;
-    
-    if (!checkMessage) {
-      return res.status(400).send("there is no msg");
-    }else if(!checkUserId){
-        return res.status(400).send("User is not valid");
-    }
-  
-    /* if (!req.body.user_id == checkMessage.user_id) {
-      return res.status(404).json({ message: "error - User is not valid" });
-    } */ else {
-      const editingThePostedMessage = await Message.findByIdAndUpdate(
+    const checkUserId = await Message.findById(user_id)
+    console.log(checkUserId)
+
+      /* const editingThePostedMessage = await Message.findByIdAndUpdate(
         message_id,
-        { content: content },
+        content,
         { new: true }
-      );
+      ); */
   
-      return res
-        .status(200)
-        .json({ message: "message edited", editingThePostedMessage });
+   return res.json({ message: "message edited", checkUserId});
     }
-  };
+ 

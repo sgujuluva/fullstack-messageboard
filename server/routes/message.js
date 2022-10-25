@@ -1,6 +1,9 @@
 import { Router } from "express";
-import { messagePost, editMessage } from "../controllers/messageControllers.js";
+import {fetchAllPost, messagePost, editMessage } from "../controllers/messageControllers.js";
 const router = Router();
+
+//getting all msg
+router.get("/get",fetchAllPost)
 
 //message route
 router.post("/post", messagePost);
