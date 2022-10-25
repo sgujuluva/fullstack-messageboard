@@ -39,6 +39,16 @@ export const editMessage = async (req, res) => {
 //delete message
 
 export const deleteMessage = async (req, res) => {
+  const { user_id, message_id } = req.body;
+
+  // to check whether message already there or not
+  if (!mongoose.Types.ObjectId.isValid(message_id))
+    return res.status(404).send(`No post with id: ${message_id}`);
+
+  //to check whether user already there or not
+  if (!mongoose.Types.ObjectId.isValid(user_id))
+    return res.status(404).send(`No user with id: ${user_id}`);
+    
   const deleteTheMessage = await Message.deleteOne({
     user_id: req.body.user_id,
     message_id: req.body.message_id,
