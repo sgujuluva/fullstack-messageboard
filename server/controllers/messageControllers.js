@@ -29,7 +29,10 @@ export const editMessage = async (req, res) => {
 
   const checkUserId = await Message.findByIdAndUpdate(
     message_id,
-    { content: req.body.content },
+    
+    { content: req.body.content,
+     $set:{ dates:{last_edited :Date.now()} }},
+
     { new: true }
   );
 
@@ -48,7 +51,7 @@ export const deleteMessage = async (req, res) => {
   //to check whether user already there or not
   if (!mongoose.Types.ObjectId.isValid(user_id))
     return res.status(404).send(`No user with id: ${user_id}`);
-    
+
   const deleteTheMessage = await Message.deleteOne({
     user_id: req.body.user_id,
     message_id: req.body.message_id,
@@ -58,3 +61,14 @@ export const deleteMessage = async (req, res) => {
     .status(200)
     .json({ message: "Message is deleted", deleteTheMessage });
 };
+
+//view all by category
+
+export const viewAllByCategory = async(req,res) => {
+
+const {user_id} = req.body;
+
+const messageCollection = await Message.find({deleted:false, category:"post"}).populate("user_id","content")
+
+return res.status(200).json({message: "The List of all messafe from the user is:",messageCollection})
+}

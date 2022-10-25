@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {fetchAllPost, messagePost, editMessage,deleteMessage } from "../controllers/messageControllers.js";
+import {fetchAllPost, messagePost, editMessage,deleteMessage,viewAllByCategory} from "../controllers/messageControllers.js";
 const router = Router();
 
 //getting all msg
@@ -13,5 +13,8 @@ router.patch("/edit", editMessage);
 
 //delete the message
 router.delete("/delete",deleteMessage)
+
+//view all by category
+router.get("/getAllMessages",viewAllByCategory)
 
 export default router;
