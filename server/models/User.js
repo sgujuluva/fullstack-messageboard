@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { generateRobohashAvatar } from "../helpers/avatar.js";
 
 const UserSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
   firstname: { type: String, required: true },
   lastname: String,
   ip: String,

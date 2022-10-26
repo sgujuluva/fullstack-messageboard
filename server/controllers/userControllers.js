@@ -7,13 +7,13 @@ export const registerUser = async (req, res) => {
 
   try {
     const checkUserNameExist = await User.findOne({
-      username: req.body.username,
+      email: req.body.email,
     });
     if (checkUserNameExist) {
       return res.status(409).json({ message: "User already registered" });
     } else {
       const createUser = await User.create({
-        username: req.body.username,
+        email: req.body.email,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         password: hashedPassword,
@@ -21,13 +21,14 @@ export const registerUser = async (req, res) => {
       });
       return res.status(200).json({ message: "User Created", createUser });
     }
-  } catch {
-    return res
-      .status(500)
-      .json({ message: "something went wrong during creation" });
+  } catch(error) {
+    return res.send(error)
+     
+      ;
   }
 };
 
+/* http://localhost:3001/user/login */
 export const loginUser = async (req, res) => {
   const {password} = req.body;
 
@@ -53,6 +54,7 @@ export const loginUser = async (req, res) => {
 }
 
 //get allusers
+/* http://localhost:3001/user/getAllUsers */
  export const getUsersList = async(req,res) => {
 const getUsers = await User.find().select("username")
 return res.status(200).json({message:"Getting the list of all users",getUsers})

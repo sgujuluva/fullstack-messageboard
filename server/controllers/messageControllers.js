@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
 import Message from "../models/Message.js";
 
+/* http://localhost:3001/message/get */
 export const fetchAllPost = async (req, res) => {
   const getPosts = await Message.find();
   return res.status(200).json({ message: "All posts here", getPosts });
 };
 
+/* http://localhost:3001/message/post */
 export const messagePost = async (req, res) => {
   const postMessage = await Message.create({
     user_id: req.body.user_id,
@@ -16,6 +18,7 @@ export const messagePost = async (req, res) => {
   return res.status(200).json({ message: "message posted", postMessage });
 };
 
+/* http://localhost:3001/message/edit */
 export const editMessage = async (req, res) => {
   const { user_id, message_id } = req.body;
 
@@ -40,7 +43,7 @@ export const editMessage = async (req, res) => {
 };
 
 //delete message
-
+/* http://localhost:3001/message/delete */
 export const deleteMessage = async (req, res) => {
   const { user_id, message_id } = req.body;
 
@@ -63,6 +66,7 @@ export const deleteMessage = async (req, res) => {
 };
 
 //view all by category
+/* http://localhost:3001/message/getAllMessages */
 
 export const viewAllByCategory = async(req,res) => {
 

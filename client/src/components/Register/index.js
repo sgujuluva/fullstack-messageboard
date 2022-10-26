@@ -3,28 +3,29 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-  const [error, setError] = useState("");
+  
   const navigate = useNavigate();
 
   //for signup newuser
   const [signUp, setSignUp] = useState({
-    username: "",
+    firstname: "",
+    lastname:"",
     email: "",
     password: "",
   });
   const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post(
-      "http://localhost:3001/user/createuser",
-      signUp
-    );
-    alert("Sign up is successfully done");
-  setSignUp({
-      username: "",
-      email: "",
-      password: "",
-    }); 
-    navigate("/login")
+    try {
+        
+        e.preventDefault();
+        axios.post("http://localhost:3001/user/createuser",signUp).then(() =>alert("Sign up is successfully done"))
+      setSignUp({
+          email: "",
+          password: "",
+        }); 
+        navigate("/login")
+    } catch (error) {
+        console.error(error.response.data);
+    }
 };
 
 
@@ -35,7 +36,7 @@ export default function Register() {
 
   return (
     <>
-    {error ? <p>{error}</p> : null}
+    {/* {error ? <p>{error}</p> : null} */}
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <label>
