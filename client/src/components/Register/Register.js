@@ -1,19 +1,21 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import{ MessageContext} from "../context"
 import { useNavigate } from "react-router-dom";
 //styles
 import { Button, Box, Typography, TextField } from "@mui/material";
 
 export default function Register() {
+  const {signUp,setSignUp} = useContext(MessageContext)
   const navigate = useNavigate();
 
   //for signup newuser
-  const [signUp, setSignUp] = useState({
+  /* const [signUp, setSignUp] = useState({
     firstname: "",
     lastname: "",
     email: "",
     password: "",
-  });
+  }); */
   const handleSubmit = (e) => {
     try {
       e.preventDefault();
