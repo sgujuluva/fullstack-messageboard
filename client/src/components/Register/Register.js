@@ -1,25 +1,20 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import{ MessageContext} from "../context"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 //styles
 import { Button, Box, Typography, TextField } from "@mui/material";
+import styles from "../Register/Register.css";
 
 export default function Register() {
   const {signUp,setSignUp} = useContext(MessageContext)
   const navigate = useNavigate();
 
-  //for signup newuser
-  /* const [signUp, setSignUp] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
-  }); */
-  const handleSubmit = (e) => {
+ 
+  const handleSubmit =async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
-      axios
+     await axios
         .post("http://localhost:3001/user/createuser", signUp)
         .then(() => alert("Sign up is successfully done"));
       setSignUp({
@@ -38,11 +33,12 @@ export default function Register() {
 
   return (
     <>
-      {/* {error ? <p>{error}</p> : null} */}
+    
       <Typography variant="h4" textAlign="center">
         Register
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <div className = {styles.formContainer}>
+      <form onSubmit={handleSubmit} className = {styles.form}>
         <Box
         maxWidth={300}
         display="flex"
@@ -57,6 +53,7 @@ export default function Register() {
         sx={{ background: "#f6f6f6", height: "" }}>
 
         <TextField
+        className= {styles.input}
           onChange={handleChangeSignUp}
           placeholder="Enter your First Name..."
           type="text"
@@ -67,6 +64,7 @@ export default function Register() {
         />
 
         <TextField
+         className= {styles.input}
           type="text"
           placeholder="Enter your Last Name..."
           autoComplete="lastname"
@@ -77,6 +75,7 @@ export default function Register() {
         />
 
         <TextField
+         className= {styles.input}
           type="email"
           placeholder="Enter your email..."
           autoComplete="email"
@@ -87,6 +86,7 @@ export default function Register() {
         />
 
         <TextField
+         className= {styles.input}
           type="password"
           placeholder="Enter a password..."
           autoComplete="new-password"
@@ -96,11 +96,16 @@ export default function Register() {
           required
         />
 
-        <Button variant="contained" type="suBmit">
+        <Button  className={styles.button}variant="contained" type="submit">
           Register
         </Button>
+        <Typography >
+          Already have an account?
+{<Link className= {styles.a} variant="contained" to = "/login">Login</Link>}
+        </Typography>
         </Box>
       </form>
+      </div>
     </>
   );
 }

@@ -1,19 +1,24 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState, useContext } from "react";
 import {MessageContext} from "../context";
+import {useNavigate} from "react-router-dom"
 import axios from "axios"
 
 export default function Login() {
 
 const {signIn, setSignIn} = useContext(MessageContext);
 
+const navigate = useNavigate();
     
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios
+            await axios.post("http://localhost:3001/user/login", signIn)
+            .then(data => localStorage.setItem("userId",data.data))
+            .then(() => localStorage.setItem("show",JSON.stringify(true)));
+            navigate("/message")
         } catch (error) {
-            
+            console.log(error)
         }
     };
     const handleChangeSignIn = (e) => {

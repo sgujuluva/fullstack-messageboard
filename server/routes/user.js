@@ -7,7 +7,7 @@ import {registerUser,loginUser,getUsersList} from "../controllers/userController
 router.post("/createuser", registerUser)
 
 //login user
-
+/* http://localhost:3001/user/login */
 router.post("/login",loginUser)
 
 //get all user list
