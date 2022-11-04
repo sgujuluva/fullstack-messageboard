@@ -15,10 +15,11 @@
     width: 90%;
     font-size: 1rem;
   }
-  .button:active {
-    transform: scale(0.98);
+  .button{
+    cursor:pointer;
   }
-  .a {
+ 
+  .a{
     text-decoration: none;
     font-weight: bold;
   }
