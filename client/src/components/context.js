@@ -60,7 +60,7 @@ function Context({ children }) {
   }, []);
 
   return (
-    <MessageContext.Provider value={{ signUp, setSignUp, signIn,userData, setSignIn }}>
+    <MessageContext.Provider value={{ signUp, setSignUp, signIn,userData, setSignIn , user,setUser}}>
       {children}
     </MessageContext.Provider>
   );
