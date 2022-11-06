@@ -6,24 +6,34 @@ import axios from "axios"
 
 export default function Login() {
 
-const {signIn, setSignIn} = useContext(MessageContext);
+const {signIn, setSignIn, userData} = useContext(MessageContext);
+
+const [input, setInput] = useState("");
 
 const navigate = useNavigate();
     
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try {
-            await axios.post("http://localhost:3001/user/login", signIn)
-            .then(data => localStorage.setItem("userId",data.data))
+        /* localStorage.setItem("userId",data.data */
+        /* try {
+            await axios.post("http://localhost:3001/user/login",signIn)
+            .then(data => console.log(data))
             .then(() => localStorage.setItem("show",JSON.stringify(true)));
+            userData(signIn)
             navigate("/message")
         } catch (error) {
             console.log(error)
-        }
+        } */
+        userData(signIn)
     };
     const handleChangeSignIn = (e) => {
-        setSignIn({ ...signIn, [e.target.name]: e.target.value });
+        
+        /* setSignIn({ ...signIn, [e.target.name]: e.target.value }); */
+       setSignIn(prev => ({
+        ...prev, [e.target.name]: e.target.value
+       }))
       };
+      console.log("the signin is:",signIn)
     return (
         <>
             <Typography variant="h3" textAlign="center">Login</Typography>

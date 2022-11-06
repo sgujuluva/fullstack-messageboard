@@ -17,10 +17,14 @@ export default function Register() {
      await axios
         .post("http://localhost:3001/user/createuser", signUp)
         .then(() => alert("Sign up is successfully done"));
+       
       setSignUp({
+        firstname: "",
+        lastname: "",
         email: "",
-        password: "",
+        password: ""
       });
+      /* localStorage.setItem("user",JSON.stringify(signUp)) */
       navigate("/login");
     } catch (error) {
       console.error(error.response.data);

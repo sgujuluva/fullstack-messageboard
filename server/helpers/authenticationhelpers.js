@@ -2,9 +2,7 @@ import jwt from "jsonwebtoken";
 
 const generateToken = (user) => {
 
-    const payload = {
-        sub:user._id
-    }
+    const payload = { sub:user._id }
 
     return new Promise((resolve,reject) => {
         jwt.sign(
@@ -21,4 +19,4 @@ const generateToken = (user) => {
             )
     })
 }
-export default {generateToken}
+export default generateToken
