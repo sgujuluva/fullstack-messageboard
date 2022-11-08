@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import cookieSession from "cookie-session"
 import passport from "passport";
 import configureJwtStrategy from "./passport-config.js";
 import { fileURLToPath } from "url";
@@ -19,6 +20,13 @@ app.use(
   })
 );
 
+app.use(
+  cookieSession({
+    name:"session",
+    keys:["cyberwolve"],
+    maxAge:24*60*100
+  })
+)
 app.use(express.json({ 
   extended: true, //to upload foto
   limit: "10mb",
@@ -27,7 +35,10 @@ app.use(express.json({
 dotenv.config();
 app.use(cookieParser());
 app.use(passport.initialize());
+app.use(passport.session());
+
 configureJwtStrategy(passport);
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const port = process.env.PORT || 3001;
